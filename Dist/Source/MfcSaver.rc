@@ -1,0 +1,205 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "scrnsave.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""scrnsave.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\MfcSaver.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+ID_APP                  ICON                    "res\\MfcSaver.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+DLG_SCRNSAVECONFIGURE DIALOGEX 0, 0, 304, 236
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW | WS_EX_APPWINDOW
+CAPTION "FunkyStars - http://www.harmlesslion.com"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,247,6,50,17,0,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Cancel",IDCANCEL,247,24,50,17,0,WS_EX_CLIENTEDGE
+    CONTROL         "Slider1",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,10,164,10
+    CONTROL         "Slider1",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,19,164,10
+    CONTROL         "Slider1",IDC_SLIDER3,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,28,164,10
+    CONTROL         "Slider1",IDC_SLIDER4,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,37,164,10
+    CONTROL         "Slider1",IDC_SLIDER5,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,46,164,10
+    CONTROL         "Slider1",IDC_SLIDER6,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,55,164,10
+    CONTROL         "Slider1",IDC_SLIDER7,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,64,164,10
+    CONTROL         "Slider1",IDC_SLIDER8,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,73,164,10
+    CONTROL         "Slider1",IDC_SLIDER9,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,82,164,10
+    CONTROL         "Slider1",IDC_SLIDER10,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,91,164,10
+    CONTROL         "Slider1",IDC_SLIDER11,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,100,164,10
+    CONTROL         "Slider1",IDC_SLIDER12,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,109,164,10
+    CONTROL         "Slider1",IDC_SLIDER13,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,118,164,10
+    CONTROL         "Slider1",IDC_SLIDER14,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,127,164,10
+    CONTROL         "Slider1",IDC_SLIDER15,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,136,164,10
+    CONTROL         "Slider1",IDC_SLIDER16,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,145,164,10
+    CONTROL         "Slider1",IDC_SLIDER17,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,154,164,10
+    CONTROL         "Slider1",IDC_SLIDER18,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,163,164,10
+    CONTROL         "Slider1",IDC_SLIDER19,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,172,164,10
+    CONTROL         "Slider1",IDC_SLIDER20,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,181,164,10
+    CONTROL         "Slider1",IDC_SLIDER21,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,190,164,10
+    CONTROL         "Slider1",IDC_SLIDER22,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,199,164,10
+    CONTROL         "Slider1",IDC_SLIDER23,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,208,164,10
+    CONTROL         "Never",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,247,52,35,10
+    CONTROL         "Always",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,247,64,38,10
+    CONTROL         "Random",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,247,76,43,10
+    CONTROL         "Never",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,247,103,35,10
+    CONTROL         "Always",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,247,114,38,10
+    CONTROL         "Fixed",IDC_RADIO10,"Button",BS_AUTORADIOBUTTON,247,126,33,10
+    CONTROL         "Random",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,247,138,43,10
+    CONTROL         "Inward",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,247,165,37,10
+    CONTROL         "Outwards",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON,247,176,46,10
+    CONTROL         "Random",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,247,189,43,10
+    PUSHBUTTON      "Reset",IDC_BUTTON1,126,224,50,10
+    LTEXT           "Var A Min",IDC_STATIC,9,9,32,8
+    LTEXT           "Var A Max",IDC_STATIC,9,18,34,8
+    LTEXT           "Var B Min",IDC_STATIC,9,27,32,8
+    LTEXT           "Var B Max",IDC_STATIC,9,36,34,8
+    LTEXT           "Var C Min",IDC_STATIC,9,45,32,8
+    LTEXT           "Var C Max",IDC_STATIC,9,54,34,8
+    LTEXT           "Var D Min",IDC_STATIC,9,63,32,8
+    LTEXT           "Var D Max",IDC_STATIC,9,72,34,8
+    LTEXT           "Var E Min",IDC_STATIC,9,81,32,8
+    LTEXT           "Var E Max",IDC_STATIC,9,90,34,8
+    LTEXT           "Var F Min",IDC_STATIC,9,99,31,8
+    LTEXT           "Var F Max",IDC_STATIC,9,108,33,8
+    LTEXT           "TimeStep Min",IDC_STATIC,9,117,44,8
+    LTEXT           "TimeStep Max",IDC_STATIC,9,126,46,8
+    LTEXT           "Pan X Speed Min",IDC_STATIC,9,135,56,8
+    LTEXT           "Pan X Speed Max",IDC_STATIC,9,144,58,8
+    LTEXT           "Pan Y Speed Min",IDC_STATIC,9,153,56,8
+    LTEXT           "Pan Y Speed Max",IDC_STATIC,9,162,58,8
+    LTEXT           "Rotate Speed Min",IDC_STATIC,9,171,58,8
+    LTEXT           "Rotate Speed Max",IDC_STATIC,9,180,60,8
+    LTEXT           "Warp Speed Min",IDC_STATIC,9,189,54,8
+    LTEXT           "Warp Speed Max",IDC_STATIC,9,198,56,8
+    LTEXT           "X=sin(varA*nTime+varB)*tmpC",IDC_STATIC,2,226,96,8
+    LTEXT           "Y=cos(varD*nTime+varE)*varF",IDC_STATIC,204,226,98,8
+    GROUPBOX        "Panning",IDC_STATIC,240,40,62,52
+    GROUPBOX        "Rotation",IDC_STATIC,240,91,62,62
+    GROUPBOX        "Direction",IDC_STATIC,240,152,62,52
+    LTEXT           "Change Time",IDC_STATIC,9,207,43,8
+    CONTROL         "",IDC_SIZESTAR,"msctls_trackbar32",TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,242,208,59,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    DLG_SCRNSAVECONFIGURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 302
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 234
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    1                       "Funkystars"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\MfcSaver.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
