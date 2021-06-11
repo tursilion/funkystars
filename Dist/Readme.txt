@@ -20,5 +20,5 @@ them be as you like.
 The slider to the bottom right (under 'direction') sets the size of the stars - left for
 smaller and right for larger. Smaller stars may be faster on some machines.
 
-This is my first program in a while to use an INI file instead of the registry. People
-seem to want that more.
+This new version moves config back to the registry cause it's simpler than dealing with Windows 10 permissions.
+
