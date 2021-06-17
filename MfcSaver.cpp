@@ -265,6 +265,8 @@ void CMfcSaver::OnDraw(	CDC* pdc)
 			Star[idx].z=idx+1;
 			Star[idx].oldx=(int)Star[idx].x;
 			Star[idx].oldy=(int)Star[idx].y;
+			Star[idx].xd = 0;
+			Star[idx].yd = 0;
 		}
 
 		if (m_centerDesktop) {
@@ -383,7 +385,7 @@ void CMfcSaver::MoveStars()
 	// Do the math...
 	tmpc=m_varc*5000.0;
 	tmpf=m_varf*5000.0;
-	int scale=1000*(6-size);
+	int scale=(1000*(6-size))/2;	// we take out the 2 when applying it to get 2x1 and such
 	// it's okay that they affect each other out of sequence, so use multiple cores here
 	//for (idx=0; idx<NUMSTARS; idx++)
 	concurrency::parallel_for (int(0), NUMSTARS, [&](int idx)
@@ -428,8 +430,18 @@ void CMfcSaver::MoveStars()
 			}
 		}
 		// should be impossible to be pulled OFF the cube
+#if 0
+		// Inertia just makes it look like noise or smoke or embers, which is cool but wrong
+		// well, except inertia might now, but I /think/ that should still be okay...
+		Star[idx].xd += vecx;
+		Star[idx].x+=Star[idx].xd;
+		Star[idx].yd += vecy;
+		Star[idx].y+=Star[idx].yd;
+#else
+		// this creates the nice spirals I always wanted nicely...
 		Star[idx].x+=vecx;
 		Star[idx].y+=vecy;
+#endif
 
 		if (((m_direction)&&(Star[idx].z > NUMSTARS)) || ((!m_direction)&&(Star[idx].z < 2)))
 		{
@@ -469,8 +481,10 @@ void CMfcSaver::MoveStars()
 			for (idx=0; idx<NUMSTARS; idx++) {
 				if ((Star[idx].oldx>=x)&&(Star[idx].oldx<x+256)&&(Star[idx].oldy>=y)&&(Star[idx].oldy<y+256)) {
 					int tmp=(int)(NUMSTARS-Star[idx].z) / scale;
-					if (tmp<1) tmp=1;
-					pWorkDC->FillSolidRect(Star[idx].oldx-x, Star[idx].oldy-y, tmp, tmp, RGB(255,255,255));
+					if (tmp<2) tmp=2;
+					int tmpx=(tmp+1)/2;
+					int tmpy=tmp/2;
+					pWorkDC->FillSolidRect(Star[idx].oldx-x, Star[idx].oldy-y, tmpx, tmpy, RGB(255,255,255));
 				}
 			}
 			pDC->BitBlt(x,y,256,256,pWorkDC,0,0,SRCCOPY);

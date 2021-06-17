@@ -101,6 +101,7 @@ public:
 	RECT myrect;
 	struct {
 		double x, y, z;
+		double xd,yd;			// inertia to battle gravity! ;)
 		int oldx, oldy;			// actually the 2D projected position, not "old" anymore
 	} Star[NUMSTARS];
 	int xoff, yoff;
