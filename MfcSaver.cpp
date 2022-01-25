@@ -265,8 +265,19 @@ void CMfcSaver::OnDraw(	CDC* pdc)
 			Star[idx].z=idx+1;
 			Star[idx].oldx=(int)Star[idx].x;
 			Star[idx].oldy=(int)Star[idx].y;
-			Star[idx].xd = 0;
-			Star[idx].yd = 0;
+//			Star[idx].xd = 0;
+//			Star[idx].yd = 0;
+			// stars can be red, blue, white or yellow
+			switch (rand()%4) {
+				case 0:
+					Star[idx].col = RGB(255,255,255); break;
+				case 1:
+					Star[idx].col = RGB(255,0,0); break;
+				case 2:
+					Star[idx].col = RGB(0,0,255); break;
+				case 3:
+					Star[idx].col = RGB(255,255,0); break;
+			}
 		}
 
 		if (m_centerDesktop) {
@@ -285,6 +296,12 @@ void CMfcSaver::OnDraw(	CDC* pdc)
 			woff-=minX;	// should be negative or 0
 			hoff-=minY;	// should be negative or 0
 		}
+
+#ifdef _DEBUG
+		// force into the window in debug mode
+		woff=(myrect.right-myrect.left)/2+1;
+		hoff=(myrect.bottom-myrect.top)/2+1;
+#endif
 
 		// Don't need to erase, we re-paint the entire screen each update
 		//CRect rcClient;
@@ -386,6 +403,11 @@ void CMfcSaver::MoveStars()
 	tmpc=m_varc*5000.0;
 	tmpf=m_varf*5000.0;
 	int scale=(1000*(6-size))/2;	// we take out the 2 when applying it to get 2x1 and such
+	if (m_direction) {
+		m_warpSpeed = abs(m_warpSpeed);
+	} else {
+		m_warpSpeed = -abs(m_warpSpeed);
+	}
 	// it's okay that they affect each other out of sequence, so use multiple cores here
 	//for (idx=0; idx<NUMSTARS; idx++)
 	concurrency::parallel_for (int(0), NUMSTARS, [&](int idx)
@@ -397,11 +419,7 @@ void CMfcSaver::MoveStars()
 		}
 
 		// move star
-		if (m_direction) {
-			Star[idx].z+=m_warpSpeed;
-		} else {
-			Star[idx].z-=m_warpSpeed;
-		}
+		Star[idx].z+=m_warpSpeed;
 		if (Star[idx].z==0) Star[idx].z=1;
 
 		// apply gravity. We really should also apply inertia, but we'll just do
@@ -425,6 +443,9 @@ void CMfcSaver::MoveStars()
 			if (range > 0.0) {
 				double pull=1/range;
 				// 2d vector of pull added to data
+				// I tried anti-grav, but everything just tries to settle into a median distance from each other,
+				// and you end up with very little in the way of patterns or obvious movement
+				// Inertia with anti-grav looks a little better, but just busy, no patterns
 				vecx += (Star[i2].x-Star[idx].x)*pull*m_gravity;
 				vecy += (Star[i2].y-Star[idx].y)*pull*m_gravity;
 			}
@@ -437,6 +458,11 @@ void CMfcSaver::MoveStars()
 		Star[idx].x+=Star[idx].xd;
 		Star[idx].yd += vecy;
 		Star[idx].y+=Star[idx].yd;
+
+		//m_warpSpeed = 0;	// intertia without movement hack
+		//m_rotateSpeed = 0;
+		// still change gravity?
+		//KillTimer(2);
 #else
 		// this creates the nice spirals I always wanted nicely...
 		Star[idx].x+=vecx;
@@ -475,17 +501,52 @@ void CMfcSaver::MoveStars()
 	pBMP->CreateCompatibleBitmap(pDC, 256, 256);
 	CBitmap *pOldBMP = pWorkDC->SelectObject(pBMP);
 
+	// draw back to front
+	double lowest = 0;
+	int lowidx = NUMSTARS;
+	for (idx=0; idx<NUMSTARS; ++idx) {
+		if (Star[idx].z > lowest) {
+			lowest = Star[idx].z;
+			lowidx = idx;
+		}
+	}
+
 	for (int x=0; x<rcClient.right; x+=256) {
 		for (int y=0; y<rcClient.bottom; y+=256) {
 			pWorkDC->FillSolidRect(0,0,256,256, RGB(0, 0, 0));
-			for (idx=0; idx<NUMSTARS; idx++) {
+			idx = lowest;
+			for (int cnt=0; cnt<NUMSTARS; ++cnt) {
+#if 1
+				// render normal view
 				if ((Star[idx].oldx>=x)&&(Star[idx].oldx<x+256)&&(Star[idx].oldy>=y)&&(Star[idx].oldy<y+256)) {
 					int tmp=(int)(NUMSTARS-Star[idx].z) / scale;
 					if (tmp<2) tmp=2;
 					int tmpx=(tmp+1)/2;
 					int tmpy=tmp/2;
-					pWorkDC->FillSolidRect(Star[idx].oldx-x, Star[idx].oldy-y, tmpx, tmpy, RGB(255,255,255));
+					
+					// fading color
+					COLORREF xx = Star[idx].col;
+					int var = (int)((Star[idx].z)/(NUMSTARS/255));
+					if (var > 254) var=254;
+					if (xx&0xff) xx-=var;
+					if (xx&0xff00) xx-=var<<8;
+					if (xx&0xff0000) xx-=var<<16;
+
+					pWorkDC->FillSolidRect(Star[idx].oldx-x, Star[idx].oldy-y, tmpx, tmpy, xx);
 				}
+#else
+				// render side view (z is now x) - this is not correct projection but you get the point...
+				int tmpz = Star[idx].z * (rcClient.right/200000.0);
+				if ((Star[idx].z>=x)&&(Star[idx].z<x+256)&&(Star[idx].oldy>=y)&&(Star[idx].oldy<y+256)) {
+					int tmp=(int)(NUMSTARS-Star[idx].x) / scale;
+					if (tmp<2) tmp=2;
+					int tmpx=(tmp+1)/2;
+					int tmpy=tmp/2;
+					pWorkDC->FillSolidRect(Star[idx].z-x, Star[idx].oldy-y, tmpx, tmpy, RGB(255,255,255));
+				}
+#endif
+				--idx;
+				if (idx < 0) idx = NUMSTARS-1;
 			}
 			pDC->BitBlt(x,y,256,256,pWorkDC,0,0,SRCCOPY);
 		}
