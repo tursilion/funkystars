@@ -379,6 +379,7 @@ void CMfcSaver::OnTimer(UINT nIDEvent)
 					break;
 			}
 		}
+		isInit = false;
 	}
 }
 
