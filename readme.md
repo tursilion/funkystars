@@ -1,4 +1,4 @@
-20210812
+20221130
 
 A windows screensaver that draws funky star patterns that I first released in 2004.
 

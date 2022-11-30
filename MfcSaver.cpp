@@ -90,6 +90,7 @@ int WarpSpeedMin, WarpSpeedMax;
 int VarRotate, VarDirection;
 int ChangeTime, CenterDesktop;
 int size;
+bool isInit = true;
 
 void GetString(int &var, char *varname, int def) {
 	char buf[128];
@@ -337,35 +338,46 @@ void CMfcSaver::OnTimer(UINT nIDEvent)
 		MoveStars();
 	}
 	if (nIDEvent==2) {
-		// Random state change
-		m_vara=(rand()%(VarAMax-VarAMin)+VarAMin)/1000.0;
-		m_varb=(rand()%(VarBMax-VarBMin)+VarBMin)/1000.0;
-		m_varc=(rand()%(VarCMax-VarCMin)+VarCMin)/1000.0;
-		m_vard=(rand()%(VarDMax-VarDMin)+VarDMin)/1000.0;
-		m_vare=(rand()%(VarEMax-VarEMin)+VarEMin)/1000.0;
-		m_varf=(rand()%(VarFMax-VarFMin)+VarFMin)/1000.0;
-		
-		m_timeStep=(rand()%(TimeStepMax-TimeStepMin)+TimeStepMin)/1000.0;
-		m_rotateSpeed=(rand()%(RotateMax-RotateMin)+RotateMin);
-		m_gravity=(rand()%(GravityMax-GravityMin));
-		m_centerDesktop = CenterDesktop!=0;
+        m_centerDesktop = CenterDesktop!=0; // todo: why isn't this random?
 
-		switch (VarRotate) {
-		case 0: m_rotate=0; break;
-		case 1: m_rotate=1; break;
-		case 2: m_rotate=2;	break;	// continuous
-		default: m_rotate=rand()%3; break;
-		}
+		// Random state change - change only ONE variable!
+		// on isInit, we need to set them all. Afterwards, just set one
+		for (int idx = 0; idx<(isInit?13:1); ++idx) {
+			int x = (isInit ? idx : rand()%13);
+			switch(x) {
+				case 0: m_vara=(rand()%(VarAMax-VarAMin)+VarAMin)/1000.0; break;
+				case 1:	m_varb=(rand()%(VarBMax-VarBMin)+VarBMin)/1000.0; break;
+				case 2: m_varc=(rand()%(VarCMax-VarCMin)+VarCMin)/1000.0; break;
+				case 3: m_vard=(rand()%(VarDMax-VarDMin)+VarDMin)/1000.0; break;
+				case 4: m_vare=(rand()%(VarEMax-VarEMin)+VarEMin)/1000.0; break;
+				case 5: m_varf=(rand()%(VarFMax-VarFMin)+VarFMin)/1000.0; break;
+				case 6: m_timeStep=(rand()%(TimeStepMax-TimeStepMin)+TimeStepMin)/1000.0; break;
+				case 7: m_rotateSpeed=(rand()%(RotateMax-RotateMin)+RotateMin); break;
+				case 8: m_gravity=(rand()%(GravityMax-GravityMin)); break;
+				case 9: 
+					switch (VarRotate) {
+						case 0: m_rotate=0; break;
+						case 1: m_rotate=1; break;
+						case 2: m_rotate=2;	break;	// continuous
+						default: m_rotate=rand()%3; break;
+					}
+					break;
 
-		if (m_rotate != 2) {
-			m_rotateSpeed /= 10000.0;
-		}
+				case 10:
+					if (m_rotate != 2) {
+						m_rotateSpeed /= 10000.0;
+					}
+					break;
 
-		m_warpSpeed=(short)(rand()%(WarpSpeedMax-WarpSpeedMin)+WarpSpeedMin+1);		
-		switch (VarDirection) {
-		case 0: m_direction=1; break;
-		case 1: m_direction=0; break;
-		default:m_direction=rand()%2; break;
+				case 11: m_warpSpeed=(short)(rand()%(WarpSpeedMax-WarpSpeedMin)+WarpSpeedMin+1);  break;
+				case 12:
+					switch (VarDirection) {
+						case 0: m_direction=1; break;
+						case 1: m_direction=0; break;
+						default:m_direction=rand()%2; break;
+					}
+					break;
+			}
 		}
 	}
 }
